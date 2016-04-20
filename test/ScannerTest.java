@@ -1,0 +1,39 @@
+package test;
+
+import static dfa.State.ID6_DFA;
+
+import java.util.List;
+
+import dfa.MyScanner;
+import org.junit.Assert;
+import org.junit.Test;
+
+import dfa.Scanner;
+import dfa.State;
+
+/** Test class for Scanner implementation. */
+public class ScannerTest {
+	private Scanner myGen = new MyScanner();// instantiate your Scanner implementation
+
+	@Test
+	public void testID6() {
+		this.dfa = ID6_DFA;
+		yields("");
+		yields("a12345", "a12345");
+		yields("a12345AaBbCc", "a12345", "AaBbCc");
+	}
+
+	private void yields(String word, String... tokens) {
+		List<String> result = this.myGen.scan(this.dfa, word);
+		if (result == null) {
+			Assert.fail(String.format(
+					"Word '%s' is erroneously rejected by %s", word, this.dfa));
+		}
+		Assert.assertEquals(tokens.length, result.size());
+		for (int i = 0; i < tokens.length; i++) {
+			Assert.assertEquals(tokens[i], result.get(i));
+		}
+	}
+
+	private State dfa;
+}
