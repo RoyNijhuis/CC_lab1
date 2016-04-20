@@ -8,13 +8,14 @@ public class MyChecker implements Checker {
     public boolean accepts(State start, String word) {
         for (int i=0; i<word.length();i++)
         {
-            start.getNext(word.charAt(i));
-            if (start.isAccepting())
+            start = start.getNext(word.charAt(i));
+
+            if (start == null)
             {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return start.isAccepting();
     }
 }
