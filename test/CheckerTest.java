@@ -1,5 +1,6 @@
 package test;
 
+import static dfa.State.DFA_LALA;
 import static dfa.State.ID6_DFA;
 
 import dfa.MyChecker;
@@ -24,6 +25,16 @@ public class CheckerTest {
 		rejects("a12 456");
 		rejects("a123456");
 		rejects("123456");
+	}
+
+	@Test
+	public void testLaLa() {
+		this.dfa = DFA_LALA;
+		accepts("La");
+		accepts("La La");
+		accepts("La La  Laaaaaa    Li");
+		rejects("La Li");
+		rejects("aL");
 	}
 
 

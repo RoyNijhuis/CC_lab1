@@ -1,5 +1,6 @@
 package test;
 
+import static dfa.State.DFA_LALA;
 import static dfa.State.ID6_DFA;
 
 import java.util.List;
@@ -21,6 +22,14 @@ public class ScannerTest {
 		yields("");
 		yields("a12345", "a12345");
 		yields("a12345AaBbCc", "a12345", "AaBbCc");
+	}
+
+	@Test
+	public void testLaLa()
+	{
+		this.dfa = DFA_LALA;
+		yields("LaaaaaaaaLaaaaa     Laaaaa         Li", "LaaaaaaaaLaaaaa     Laaaaa         Li");
+		yields("Laaaa Laaaaaaaa Laaaaa Laaaa Laaaaa Li La", "Laaaa Laaaaaaaa ", "Laaaaa Laaaa Laaaaa Li ", "La");
 	}
 
 	private void yields(String word, String... tokens) {
